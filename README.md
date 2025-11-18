@@ -206,7 +206,7 @@ mycohort_FINAL_CLEANED.bed/bim/fam
 ## Project Structure
 
 ```
-/your-repo-name/
+/genotype_qc/
 ├── qc_main.sh
 ├── data_prep.sh
 ├── environment.yml
