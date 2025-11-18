@@ -1,0 +1,21 @@
+# Conda environment for Genotype QC with a minimal set of tools.
+#
+# To create this environment:
+# conda env create -f environment.yml
+#
+# To activate this environment:
+# conda activate genotype_qc
+
+name: genotype_qc
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - bcftools
+  - plink   # This is the package for PLINK 1.9
+  - plink2
+  - r-base
+  - conda-forge::perl-termreadkey
