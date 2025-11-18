@@ -64,7 +64,7 @@ analysis_name=$4      # Name of the analysis (for plots)
 maf_threshold=$5      # Final MAF threshold (e.g., 0.01)
 missigness_threshold=$6 # Final *SNP* missingness threshold (e.g., 0.02)
 expected_anc=$7 #expected ancestry to determine outliers based on 
-
+genome_build=$8 #genome build, either b37 or b38
 # Get just the filename (e.g., "mydata")
 bfile_prefix=$(basename $bfile_in)
 
@@ -91,11 +91,11 @@ plink --bfile ${bfile_in} --allow-no-sex --geno ${PREFILTER_GENO} --mind ${PREFI
 
 # splitting X pseudoautosomal region as XY (25)
 echo "Step 0.3: Splitting pseudoautosomal region..."
-plink --bfile ${qc_out_dir}/${bfile_prefix}_miss0.1_wopseudo_rsid_split --split-x b37 no-fail --make-bed --out ${qc_out_dir}/${bfile_prefix}_rsid_miss0.1
+plink --bfile ${qc_out_dir}/${bfile_prefix}_miss0.1_wopseudo_rsid_split --split-x $genome_build no-fail --make-bed --out ${qc_out_dir}/${bfile_prefix}_rsid_miss0.1
 
 # convert variant IDS from rsids to a more standard format
 echo "Step 0.3: Standardizing variant IDs..."
-plink2 --bfile ${qc_out_dir}/${bfile_prefix}_rsid_miss0.1 --set-all-var-ids @:#[b37]\$r,\$a --make-bed --out ${qc_out_dir}/${bfile_prefix}_miss0.1
+plink2 --bfile ${qc_out_dir}/${bfile_prefix}_rsid_miss0.1 --set-all-var-ids @:#[$genome_build]\$r,\$a --make-bed --out ${qc_out_dir}/${bfile_prefix}_miss0.1
 
 # This is the base file for the rest of the QC
 BASE_BFILE="${qc_out_dir}/${bfile_prefix}_miss0.1"
@@ -181,12 +181,12 @@ echo "Step 5: Processing 1000 Genomes reference data..."
 onekg_prefix=$(basename $ONEKG_BFILE)
 
 # QC the 1KG file
-plink --bfile $ONEKG_BFILE --set-missing-var-ids @:#[b37]\$1,\$2 --make-bed --out ${qc_out_dir}/${onekg_prefix}_nomisingid
+plink --bfile $ONEKG_BFILE --set-missing-var-ids @:#[$genome_build]\$1,\$2 --make-bed --out ${qc_out_dir}/${onekg_prefix}_nomisingid
 plink --bfile ${qc_out_dir}/${onekg_prefix}_nomisingid --geno ${PREFILTER_GENO} --mind ${PREFILTER_MIND} --allow-no-sex --make-bed --out ${qc_out_dir}/${onekg_prefix}_nomisingid_miss0.1_mind0.1
 plink --bfile ${qc_out_dir}/${onekg_prefix}_nomisingid_miss0.1_mind0.1 --maf ${maf_threshold} --allow-no-sex --make-bed --out ${qc_out_dir}/${onekg_prefix}_nomisingid_miss0.1_mind0.1_maf${maf_threshold}
 
 # set variant id format for 1kg file
-plink2 --bfile ${qc_out_dir}/${onekg_prefix}_nomisingid_miss0.1_mind0.1_maf${maf_threshold} --set-all-var-ids @:#[b37]\$r,\$a --make-bed --out ${qc_out_dir}/${onekg_prefix}_idcorrected
+plink2 --bfile ${qc_out_dir}/${onekg_prefix}_nomisingid_miss0.1_mind0.1_maf${maf_threshold} --set-all-var-ids @:#[$genome_build]\$r,\$a --make-bed --out ${qc_out_dir}/${onekg_prefix}_idcorrected
 
 # Extract intersecting variants
 plink --bfile ${qc_out_dir}/${onekg_prefix}_idcorrected --extract ${LD_PRUNED_FILE}.bim --recode --make-bed --out ${qc_out_dir}/${onekg_prefix}_intersect
