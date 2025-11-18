@@ -41,7 +41,8 @@ You must activate this environment every time you run the pipeline.
 This pipeline requires a set of reference data files (`aux_data/`). These files are hosted on GitHub Releases to keep the main repository lightweight.
 
 **You must download and extract these files before running the pipeline.**
-**Important note: the reference files in this directory are all in genome buildGRCh37**
+
+**Important note: the reference files in this directory are all in genome build GRCh37**
 
 You can do this in two steps from your Linux shell.
 
