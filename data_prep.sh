@@ -91,7 +91,7 @@ rm "${hrc_ref_unzipped_name}"
 rm Run-plink.sh
 # The perl script also creates other logs, like Exclude-*.txt, Force-Allele1-*.txt, etc.
 # We can remove them to keep the directory clean.
-rm -f Exclude-*.txt Force-Allele1-*.txt Strand-Flip-*.txt NO-SNP-*.txt
+rm -f ${file_prefix}-updated-chr*
 
 # Return to the original starting directory
 cd "${start_dir}"
