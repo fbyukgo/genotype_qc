@@ -74,7 +74,7 @@ After these two steps, you will have the `aux_data/` folder, and the pipeline is
 - aux_data/1Kg.bim  
 - aux_data/1Kg.fam  
 - aux_data/HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz (originally from ftp://ngs.sanger.ac.uk/production/hrc/HRC.r1-1/HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz) 
-- aux_data/Populationfile-1kg.txt  
+- aux_data/population_panel_1KG.txt  
 - aux_data/complex_regions.txt  
 
 ---
@@ -228,7 +228,7 @@ mycohort_FINAL_CLEANED.bed/bim/fam
 │   ├── 1Kg.bim
 │   ├── 1Kg.fam
 │   ├── HRC.r1-1.GRCh37...gz
-│   ├── Populationfile-1kg.txt
+│   ├── population_panel_1KG.txt
 │   └── complex_regions.txt
 │
 └── libs/
