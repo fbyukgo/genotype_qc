@@ -51,9 +51,9 @@ LD_R2=0.2              # LD pruning r^2 threshold
 # SCRIPT ARGUMENTS
 #-------------------------------------------------------------------------------
 
-if [ "$#" -ne 7 ]; then
-    echo "Usage: $0 <bfile_in> <qc_out_dir> <report_plot_dir> <analysis_name> <maf_threshold> <missigness_threshold> <expected_anc>"
-    echo "Example: $0 /path/to/mydata /qc/output /qc/reports 'MyCohort' 0.01 0.02 'EUR'"
+if [ "$#" -ne 8 ]; then
+    echo "Usage: $0 <bfile_in> <qc_out_dir> <report_plot_dir> <analysis_name> <maf_threshold> <missigness_threshold> <expected_anc> <genome_build>"
+    echo "Example: $0 /path/to/mydata /qc/output /qc/reports 'MyCohort' 0.01 0.02 'EUR' 'b37'"
     exit 1
 fi
 

@@ -32,7 +32,6 @@ qc_reports/
 *_intersect*
 *_1KG_merged*
 *_genome*
-*_mds*
 *miss0.02*
 *.log
 Run-plink.sh
