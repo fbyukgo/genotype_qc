@@ -118,8 +118,8 @@ Usage:
              <analysis_name> \
              <maf_threshold> \
              <missingness_threshold> \
-	     <expected_anc> \
-	     <genome_build>
+		<expected_anc> \
+	     	<genome_build>
 ```
 
 Arguments:
@@ -145,7 +145,7 @@ Example:
              0.01 \
              0.02 \
              "EUR" \
-	     "b37"
+		"b37"
 ```
 
 ---
