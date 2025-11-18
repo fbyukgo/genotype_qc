@@ -139,13 +139,13 @@ Example:
 
 ```bash
 ./qc_main.sh /path/to/my/data/mycohort-updated \
-		./qc_output \
-		./qc_reports \
-             	"MyCohort" \
-             	0.01 \
-             	0.02 \
-             	"EUR" \
-	   	"b37"
+ ./qc_output \
+ ./qc_reports \
+ "MyCohort" \
+ 0.01 \
+ 0.02 \
+ "EUR" \
+ "b37"
 
 ```
 
