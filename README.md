@@ -113,13 +113,13 @@ Usage:
 
 ```bash
 ./qc_main.sh <bfile_in> \
-		<qc_out_dir> \
-		<report_plot_dir> \
-		<analysis_name> \
-             	<maf_threshold> \
-             	<missingness_threshold> \
-		<expected_anc> \
-	     	<genome_build>
+ <qc_out_dir> \
+ <report_plot_dir> \
+ <analysis_name> \
+ <maf_threshold> \
+ <missingness_threshold> \
+ <expected_anc> \
+ <genome_build>
 ```
 
 Arguments:
