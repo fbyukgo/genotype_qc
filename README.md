@@ -9,8 +9,8 @@ A standardized BASH and R pipeline for performing Quality Control (QC) on human 
 First, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/fbyukgo/genotype_qc.git
+cd genotype_qc
 ```
 
 ### 1.2. Create the Conda Environment
@@ -41,6 +41,7 @@ You must activate this environment every time you run the pipeline.
 This pipeline requires a set of reference data files (`aux_data/`). These files are hosted on GitHub Releases to keep the main repository lightweight.
 
 **You must download and extract these files before running the pipeline.**
+**Important note: the reference files in this directory are all in genome buildGRCh37**
 
 You can do this in two steps from your Linux shell.
 
@@ -69,7 +70,7 @@ After these two steps, you will have the `aux_data/` folder, and the pipeline is
 - aux_data/1Kg.bed  
 - aux_data/1Kg.bim  
 - aux_data/1Kg.fam  
-- aux_data/HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz  
+- aux_data/HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz (originally from ftp://ngs.sanger.ac.uk/production/hrc/HRC.r1-1/HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz) 
 - aux_data/Populationfile-1kg.txt  
 - aux_data/complex_regions.txt  
 
