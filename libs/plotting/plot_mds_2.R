@@ -1,8 +1,9 @@
-rgs = commandArgs(trailingOnly=TRUE)
+args = commandArgs(trailingOnly=TRUE)
 
 if (length(args) < 5) {
 	  stop("Not enough arguments. Usage: Rscript plot_mds_2.R <prefix> <Cohort> <out_dir> <panel_file> <expected_ancestry>")
 }
+
 
 prefix <- args[1]
 Cohort <- args[2]
