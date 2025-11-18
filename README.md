@@ -1,4 +1,3 @@
-```markdown
 # Genotype QC Pipeline
 
 A standardized BASH and R pipeline for performing Quality Control (QC) on human genotype data. This workflow starts from raw PED/MAP files, prepares them using the Michigan Imputation Server pre-phasing checks, and then runs a comprehensive QC analysis (sample and variant QC) using PLINK.
