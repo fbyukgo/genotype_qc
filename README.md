@@ -52,7 +52,7 @@ You can do this in two steps from your Linux shell.
     Now, use `wget` in your terminal to download it. (Paste the URL you just copied).
 
     ```bash 
-    wget https://github.com/fbyukgo/genotype-qc/releases/download/v1.0.0/aux_data_v1.tar.gz)
+    wget https://github.com/fbyukgo/genotype-qc/releases/download/v1.0.0/aux_data_v1.tar.gz
     ```
 
 2.  **Unzip the Data:**
