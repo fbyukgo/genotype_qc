@@ -49,4 +49,6 @@ NO-SNP-*.txt
 # 4. Ignore Conda environment
 # ----------------------------------------------------------------
 genotype_qc/
-EOF
+
+# 5. Ignore test scripts
+run_qc_main.sh

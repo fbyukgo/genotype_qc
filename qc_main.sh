@@ -165,27 +165,9 @@ Rscript ${PLOTTING_LIBS_DIR}/plot_relatedness.R ${qc_out_dir}/${bfile_prefix}_ld
 echo "Step 5: Preparing population panel files for PCA..."
 
 # Define output paths for generated panel files
-PANEL_1KG_OUT="${qc_out_dir}/population_panel_1KG.txt"
+PANEL_1KG_OUT="${AUX_DATA_DIR}/population_panel_1KG.txt"
 PANEL_OUR_OUT="${qc_out_dir}/population_panel_our.txt"
 PANEL_MERGED_OUT="${qc_out_dir}/population_panel_merged.txt"
-
-# Prepare 1KG panel file (filters to samples present in the 1KG bfile)
-while IFS= read -r line; do
-    sample=$(echo $line | cut -d" " -f1)
-    grep_res=$(grep -w $sample ${ONEKG_BFILE}.fam) # Use -w for whole-word match
-    if [ ! -z "${grep_res}" ]; then
-        echo $line >> ${qc_out_dir}/tmp_panel.txt
-    fi
-done < <(cat ${ONEKG_POPULATION_FILE} | awk '{print $2, $2, $1}' | grep -v VSS)
-
-cat ${qc_out_dir}/tmp_panel.txt | uniq | \
-    sed 's/JPT/ASN/g' | sed 's/ASW/AFR/g' | sed 's/CEU/EUR/g' | \
-    sed 's/CHB/ASN/g' | sed 's/CHD/ASN/g' | sed 's/YRI/AFR/g' | \
-    sed 's/LWK/AFR/g' | sed 's/TSI/EUR/g' | sed 's/MXL/AMR/g' | \
-    sed 's/GBR/EUR/g' | sed 's/FIN/EUR/g' | sed 's/CHS/ASN/g' | \
-    sed 's/PUR/AMR/g' > ${PANEL_1KG_OUT}
-
-rm ${qc_out_dir}/tmp_panel.txt
 
 # for our samples
 fam_to_modify=${bfile_in}.fam
