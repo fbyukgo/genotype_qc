@@ -113,11 +113,11 @@ Usage:
 
 ```bash
 ./qc_main.sh <bfile_in> \
-             <qc_out_dir> \
-             <report_plot_dir> \
-             <analysis_name> \
-             <maf_threshold> \
-             <missingness_threshold> \
+		<qc_out_dir> \
+		<report_plot_dir> \
+		<analysis_name> \
+             	<maf_threshold> \
+             	<missingness_threshold> \
 		<expected_anc> \
 	     	<genome_build>
 ```
@@ -139,13 +139,14 @@ Example:
 
 ```bash
 ./qc_main.sh /path/to/my/data/mycohort-updated \
-             ./qc_output \
-             ./qc_reports \
-             "MyCohort" \
-             0.01 \
-             0.02 \
-             "EUR" \
-		"b37"
+		./qc_output \
+		./qc_reports \
+             	"MyCohort" \
+             	0.01 \
+             	0.02 \
+             	"EUR" \
+	   	"b37"
+
 ```
 
 ---
