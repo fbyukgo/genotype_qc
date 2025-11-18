@@ -63,6 +63,8 @@ You can do this in two steps from your Linux shell.
     ```bash
     # This will create the 'aux_data/' directory
     tar -xzvf aux_data_v1.tar.gz
+    # we can delete the gzipped archive
+    rm aux_data_v1.tar.gz 
     ```
 
 After these two steps, you will have the `aux_data/` folder, and the pipeline is ready to run.
