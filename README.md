@@ -125,9 +125,10 @@ Arguments:
 - `<bfile_in>`: path to updated bfile  
 - `<qc_out_dir>`: PLINK output directory  
 - `<report_plot_dir>`: plots + reports  
-- `<analysis_name>`: label for plots  
+- `<analysis_name>`: label for plots i.e "MyAnalysis" 
 - `<maf_threshold>`: e.g., 0.01  
 - `<missingness_threshold>`: e.g., 0.02  
+- `<expected_anc>`: e.g. "EUR", options: str --> ["EUR", "ASN", "AMR", "AFR"] 
 
 Example:
 
@@ -137,7 +138,8 @@ Example:
              ./qc_reports \
              "MyCohort" \
              0.01 \
-             0.02
+             0.02 \
+             "EUR"
 ```
 
 ---

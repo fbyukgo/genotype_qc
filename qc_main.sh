@@ -51,9 +51,9 @@ LD_R2=0.2              # LD pruning r^2 threshold
 # SCRIPT ARGUMENTS
 #-------------------------------------------------------------------------------
 
-if [ "$#" -ne 6 ]; then
-    echo "Usage: $0 <bfile_in> <qc_out_dir> <report_plot_dir> <analysis_name> <maf_threshold> <missigness_threshold>"
-    echo "Example: $0 /path/to/mydata /qc/output /qc/reports 'MyCohort' 0.01 0.02"
+if [ "$#" -ne 7 ]; then
+    echo "Usage: $0 <bfile_in> <qc_out_dir> <report_plot_dir> <analysis_name> <maf_threshold> <missigness_threshold> <expected_anc>"
+    echo "Example: $0 /path/to/mydata /qc/output /qc/reports 'MyCohort' 0.01 0.02 'EUR'"
     exit 1
 fi
 
@@ -63,6 +63,7 @@ report_plot_dir=$3    # Directory for plots and reports
 analysis_name=$4      # Name of the analysis (for plots)
 maf_threshold=$5      # Final MAF threshold (e.g., 0.01)
 missigness_threshold=$6 # Final *SNP* missingness threshold (e.g., 0.02)
+expected_anc=$7 #expected ancestry to determine outliers based on 
 
 # Get just the filename (e.g., "mydata")
 bfile_prefix=$(basename $bfile_in)
@@ -202,7 +203,7 @@ plink --bfile ${qc_out_dir}/${bfile_prefix}_1KG_merged --read-genome ${qc_out_di
 
 # plot the MDS file
 echo "Step 5: Plotting MDS..."
-Rscript ${PLOTTING_LIBS_DIR}/plot_mds_2.R ${qc_out_dir}/${bfile_prefix}_1KG_merged_mds $analysis_name $report_plot_dir ${PANEL_MERGED_OUT}
+Rscript ${PLOTTING_LIBS_DIR}/plot_mds_2.R ${qc_out_dir}/${bfile_prefix}_1KG_merged_mds $analysis_name $report_plot_dir ${PANEL_MERGED_OUT} ${expected_anc}
 
 
 #-------------------------------------------------------------------------------
