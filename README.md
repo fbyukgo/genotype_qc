@@ -48,7 +48,7 @@ You can do this in two steps from your Linux shell.
 
 1.  **Download the Data:**
     First, you need the URL for the release file.
-    * Go to the [Releases page](https://github.com/fbyukgo/genotype-qc/releases) for this repository.
+    * Go to the [Releases page](https://github.com/fbyukgo/genotype_qc/releases) for this repository.
     * Find the latest release, right-click on the `aux_data_v1.tar.gz` asset, and select "Copy Link Address".
 
     Now, use `wget` in your terminal to download it. (Paste the URL you just copied).
