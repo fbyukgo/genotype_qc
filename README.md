@@ -180,8 +180,8 @@ mycohort-updated_miss0.02_hwe1e-6_mafgte0.01.{bed,bim,fam}
 
 Create:
 
-```
-samples_to_remove.txt
+```bash
+$ cat samples_to_remove.txt
 FID_101 IID_101
 FID_202 IID_202
 ```
