@@ -37,25 +37,35 @@ You must activate this environment every time you run the pipeline.
 
 ### 1.3. Add Reference Data
 
-This pipeline requires several external reference files. Most are included in this repository in the `aux_data/` directory (i.e 1Kg ref files, population file for this and complex regions all in GRCh37 build).
 
-However, one file, `HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz`, must be downloaded manually due to its size.
+This pipeline requires a set of reference data files (`aux_data/`). These files are hosted on GitHub Releases to keep the main repository lightweight.
 
-**Action Required:**
+**You must download and extract these files before running the pipeline.**
 
-1.  **Download the HRC file:**
-    * Go to the Michigan Imputation Server tools page: [https://imputationserver.readthedocs.io/en/latest/prepare-your-data/](https://imputationserver.readthedocs.io/en/latest/prepare-your-data/)
-    * Find the "HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz" file.
-    * Download it directly using `wget`:
+You can do this in two steps from your Linux shell.
+
+1.  **Download the Data:**
+    First, you need the URL for the release file.
+    * Go to the [Releases page](https://github.com/YourLabOrg/genotype-qc-pipeline/releases) for this repository. (*Note: Update this link to your new repo URL*).
+    * Find the latest release, right-click on the `aux_data_v1.tar.gz` asset, and select "Copy Link Address".
+
+    Now, use `wget` in your terminal to download it. (Paste the URL you just copied).
+
     ```bash
-    wget [https://www.well.ox.ac.uk/~wrayner/tools/HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz](https://www.well.ox.ac.uk/~wrayner/tools/HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz)
+    # This is an example URL. Replace it with the one you copied.
+    wget [https://github.com/YourLabOrg/genotype-qc-pipeline/releases/download/v1.0.0/aux_data_v1.tar.gz](https://github.com/YourLabOrg/genotype-qc-pipeline/releases/download/v1.0.0/aux_data_v1.tar.gz)
     ```
 
-2.  **Move the file:**
-    * Place the downloaded `HRC.r1-1.GRCh37.wgs.mac5.sites.tab.gz` file directly into your `aux_data/` directory.
+2.  **Unzip the Data:**
+    Once the download is finished, run this command to unzip the file. This will create the `aux_data/` directory.
 
-After this step, your `aux_data/` directory should contain all the required files and is ready to use.
-Place all required files inside the `aux_data/` directory:
+    ```bash
+    # This will create the 'aux_data/' directory
+    tar -xzvf aux_data_v1.tar.gz
+    ```
+
+After these two steps, you will have the `aux_data/` folder, and the pipeline is ready to run.
+
 
 - aux_data/1Kg.bed  
 - aux_data/1Kg.bim  
