@@ -1,6 +1,8 @@
 # Genotype QC Pipeline
 
-A standardized BASH and R pipeline for performing Quality Control (QC) on human genotype data. This workflow starts from raw PED/MAP files, prepares them using the Michigan Imputation Server pre-phasing checks, and then runs a comprehensive QC analysis (sample and variant QC) using PLINK.
+A standardized BASH and R pipeline for performing Quality Control (QC) on human genotype data. This workflow starts from raw PED/MAP files, prepares them using the Michigan Imputation Server pre-imputation checks (https://www.chg.ox.ac.uk/~wrayner/tools/), and then runs a comprehensive QC analysis (sample and variant QC) using PLINK.
+
+You can run this pipeline either using a bash script providing arguments from terminal or using a Snakemake pipeline with a config file specifying input files and parameters.   
 
 ## Installation & Setup
 
@@ -15,7 +17,7 @@ cd genotype_qc
 
 ###  Create the Conda Environment
 
-This pipeline uses plink, plink2, bcftools, and R. All dependencies are defined in the `environment.yml` file.
+This pipeline uses plink, plink2, bcftools, R and Snakemake (optional). All dependencies are defined in the `environment.yml` file.
 
 Recommended (using Mamba):
 
