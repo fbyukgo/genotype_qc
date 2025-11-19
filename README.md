@@ -2,9 +2,9 @@
 
 A standardized BASH and R pipeline for performing Quality Control (QC) on human genotype data. This workflow starts from raw PED/MAP files, prepares them using the Michigan Imputation Server pre-phasing checks, and then runs a comprehensive QC analysis (sample and variant QC) using PLINK.
 
-## 1. Installation & Setup
+## Installation & Setup
 
-### 1.1. Get the Pipeline
+### Get the Pipeline
 
 First, clone this repository to your local machine:
 
@@ -13,7 +13,7 @@ git clone https://github.com/fbyukgo/genotype_qc.git
 cd genotype_qc
 ```
 
-### 1.2. Create the Conda Environment
+###  Create the Conda Environment
 
 This pipeline uses plink, plink2, bcftools, and R. All dependencies are defined in the `environment.yml` file.
 
@@ -35,7 +35,7 @@ conda activate genotype_qc
 
 You must activate this environment every time you run the pipeline.
 
-### 1.3. Add Reference Data
+### Add Reference Data
 
 
 This pipeline requires a set of reference data files (`aux_data/`). These files are hosted on GitHub Releases to keep the main repository lightweight.
@@ -79,7 +79,7 @@ After these two steps, you will have the `aux_data/` folder, and the pipeline is
 
 ---
 
-## 2. Running the QC Pipeline
+## Running the QC Pipeline
 
 ### Step 1: Prepare Your Input Data
 
@@ -141,8 +141,8 @@ Example:
 
 ```bash
 ./qc_main.sh /path/to/my/data/mycohort-updated \
- ./qc_output \
- ./qc_reports \
+ qc_output \
+ qc_reports \
  "MyCohort" \
  0.01 \
  0.02 \
@@ -151,7 +151,7 @@ Example:
 
 ```
 
-### Step 3: Run the Main QC with Snakemake (recommended)
+### Step 3 Alternative: Run the Main QC with Snakemake (recommended)
 
 Configuration:
 
@@ -186,7 +186,6 @@ snakemake -np
 snakemake --cores 4
 
 # run in the background
-
 nohup snakemake --cores 8 > snakemake.log 2>&1 &
 
 # or submit to SGE or SLURM cluster (dont forget to add your conda env activatation snippet)
@@ -198,14 +197,14 @@ nohup snakemake --cores 8 > snakemake.log 2>&1 &
 
 ---
 
-## 3. Understanding the Output
+## Understanding the Output
 
 ### QC Reports & Plots
 
 Saved in:
 
 ```
-./qc_reports
+qc_reports
 ```
 
 Check for:
@@ -221,7 +220,7 @@ Check for:
 Stored in:
 
 ```
-./qc_output
+qc_output
 ```
 
 Example:
@@ -248,7 +247,7 @@ Run:
 plink --bfile ./qc_output/mycohort-updated_miss0.02_hwe1e-6_mafgte0.01 \
       --remove samples_to_remove.txt \
       --make-bed \
-      --out ./qc_output/mycohort_FINAL_CLEANED
+      --out qc_output/mycohort_FINAL_CLEANED
 ```
 
 Final dataset:
@@ -263,6 +262,8 @@ mycohort_FINAL_CLEANED.bed/bim/fam
 
 ```
 /genotype_qc/
+├── Snakefile           
+├── config.yaml        
 ├── qc_main.sh
 ├── data_prep.sh
 ├── environment.yml
@@ -284,6 +285,6 @@ mycohort_FINAL_CLEANED.bed/bim/fam
         ├── plot_miss.R
         ├── plot_relatedness.R
         └── plot_sex.R
-```
+
 ```
 
