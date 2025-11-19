@@ -151,6 +151,51 @@ Example:
 
 ```
 
+### Step 3: Run the Main QC with Snakemake (recommended)
+
+Configuration:
+
+```yaml
+# config.yaml
+analysis_name: "MyCohort"
+genome_build: "b37"
+
+# Paths
+bfile_in: "/path/to/my/data/mycohort-updated" # Do not include .bed/.bim/.fam extension
+out_dir: "qc_output"
+plot_dir: "qc_reports"
+
+# QC Parameters
+params:
+  pre_geno: 0.1        # Initial SNP missingness
+  pre_mind: 0.1        # Initial Sample missingness
+  final_maf: 0.01      # Final MAF threshold
+  final_miss: 0.02     # Final SNP missingness
+  hwe: 1e-6            # Hardy-Weinberg Equilibrium
+  expected_ancestry: "EUR" # For outlier detection
+
+```
+
+Execution:
+
+```bash
+# first do a dry run to make sure everthing is working
+snakemake -np
+
+# then run the pipeline specifying the number of cores to use
+snakemake --cores 4
+
+# run in the background
+
+nohup snakemake --cores 8 > snakemake.log 2>&1 &
+
+# or submit to SGE or SLURM cluster (dont forget to add your conda env activatation snippet)
+
+
+```
+
+
+
 ---
 
 ## 3. Understanding the Output

@@ -40,11 +40,12 @@ Force-Allele1-*.txt
 Strand-Flip-*.txt
 NO-SNP-*.txt
 
+
 # 3. Ignore OS/IDE files
 # ----------------------------------------------------------------
 .DS_Store
 .vscode/
-
+.snakemake/
 # 4. Ignore Conda environment
 # ----------------------------------------------------------------
 genotype_qc/

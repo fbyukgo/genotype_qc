@@ -1,0 +1,32 @@
+# config.yaml
+analysis_name: "MyCohort"
+genome_build: "b37"
+
+# Paths (can be absolute or relative to the Snakefile)
+bfile_in: "/path/to/my/data/mycohort-updated" # Do not include .bed/.bim/.fam extension
+out_dir: "qc_output"
+plot_dir: "qc_reports"
+
+# Auxiliary Files
+aux_dir: "aux_data"
+onekg_bfile: "aux_data/1Kg"
+complex_regions: "aux_data/complex_regions.txt"
+onekg_pop_file: "aux_data/population_panel_1KG.txt"
+
+# Scripts
+script_dir: "libs"
+plot_script_dir: "libs/plotting"
+
+# QC Parameters
+params:
+  pre_geno: 0.1
+  pre_mind: 0.1
+  final_maf: 0.01
+  final_miss: 0.02
+  hwe: 1e-6
+  expected_ancestry: "EUR"
+  
+  # LD Pruning
+  ld_window: 50
+  ld_step: 5
+  ld_r2: 0.2

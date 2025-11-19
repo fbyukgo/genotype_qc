@@ -19,3 +19,4 @@ dependencies:
   - plink2
   - r-base
   - conda-forge::perl-termreadkey
+  - snakemake
