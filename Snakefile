@@ -10,20 +10,18 @@ FINAL_NAME = f"{BASE_NAME}_miss{config['params']['final_miss']}_hwe{config['para
 # --- Target Rule ---
 rule all:
     input:
-        expand("{out}/{name}.{ext}", 
-            out=config['out_dir'], 
-            name=FINAL_NAME, 
-            ext=['bed', 'bim', 'fam']),
-        
-        # ... rest of inputs 
+        # 1. The Final PLINK files (Using double brackets {{ }} to escape f-string)
+        expand(f"{config['out_dir']}/{FINAL_NAME}.{{ext}}", ext=['bed', 'bim', 'fam']),
 
-	# Plots (Sample QC)
-        f"{config['plot_dir']}/{PREFIX}_missingness_plot.done", # Dummy output for plots
+        # 2. Plots (Sample QC)
+        f"{config['plot_dir']}/{PREFIX}_missingness_plot.done",
         f"{config['plot_dir']}/{PREFIX}_sexcheck_plot.done",
         f"{config['plot_dir']}/{PREFIX}_het_plot.done",
         f"{config['plot_dir']}/{PREFIX}_relatedness_plot.done",
-        f"{config['plot_dir']}/{PREFIX}_MDS_plot.done"
+        f"{config['plot_dir']}/{PREFIX}_MDS_plot.done",
 
+        # 3. Cleanup Trigger (Note the comma on the line above!)
+        f"{config['out_dir']}/cleanup.done"
 #-------------------------------------------------------------------------------
 # Step 0: Pre-processing
 #-------------------------------------------------------------------------------
@@ -299,4 +297,29 @@ rule final_variant_qc:
     shell:
         """
         plink --bfile {params.base} --geno {params.miss} --hwe {params.hwe} --maf {params.maf} --make-bed --out {params.out_final}
+        """
+#-------------------------------------------------------------------------------
+# Step 9: Cleanup
+#-------------------------------------------------------------------------------
+rule cleanup:
+    input:
+        # We use the Bed file and Plot flags to ensure this runs LAST
+        bed = rules.final_variant_qc.output.bed,
+        mds_plot = rules.ancestry_mds.output.plot_flag,
+        rel_plot = rules.check_relatedness.output.plot_flag
+    output:
+        touch(f"{config['out_dir']}/cleanup.done")
+    params:
+        dir = config["out_dir"],
+        final_name = FINAL_NAME,
+        ref_name = "1kg_ref"
+    shell:
+        """
+        # Find all files in output dir
+        # Exclude final files, reference files, and the cleanup flag
+        # Delete everything else
+        find {params.dir} -type f \
+            -not -name "{params.final_name}.*" \
+            -not -name "cleanup.done" \
+            -delete
         """
