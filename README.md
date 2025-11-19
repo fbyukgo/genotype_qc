@@ -42,19 +42,19 @@ This pipeline requires a set of reference data files (`aux_data/`). These files 
 
 **You must download and extract these files before running the pipeline.**
 
-**Important note: the reference files in this directory are all in genome build GRCh37**
+**Important note: the reference files in this directory are all in genome build GRCh37 for now**
 
 You can do this in two steps from your Linux shell.
 
 1.  **Download the Data:**
     First, you need the URL for the release file.
     * Go to the [Releases page](https://github.com/fbyukgo/genotype_qc/releases) for this repository.
-    * Find the latest release, right-click on the `aux_data_v1.tar.gz` asset, and select "Copy Link Address".
+    * Find the latest release, right-click on the `aux_data_GRCh37_v1.tar.gz` asset, and select "Copy Link Address".
 
     Now, use `wget` in your terminal to download it. (Paste the URL you just copied).
 
     ```bash 
-    wget https://github.com/fbyukgo/genotype_qc/releases/download/1.0/aux_data_v1.tar.gz
+    wget https://github.com/fbyukgo/genotype_qc/releases/download/1.0/aux_data_GRCh37_v1.tar.gz
     ```
 
 2.  **Unzip the Data:**
@@ -62,9 +62,9 @@ You can do this in two steps from your Linux shell.
 
     ```bash
     # This will create the 'aux_data/' directory
-    tar -xzvf aux_data_v1.tar.gz
+    tar -xzvf aux_data_GRCh37_v1.tar.gz
     # we can delete the gzipped archive
-    rm aux_data_v1.tar.gz 
+    rm aux_data_GRCh37_v1.tar.gz
     ```
 
 After these two steps, you will have the `aux_data/` folder, and the pipeline is ready to run.
