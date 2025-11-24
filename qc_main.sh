@@ -107,7 +107,6 @@ plink --bfile ${BASE_BFILE} --autosome --keep-allele-order --make-bed --out ${qc
 
 # MAF Filter
 plink --bfile ${qc_out_dir}/${bfile_prefix}_chr1-22 --maf ${maf_threshold} --keep-allele-order --make-bed --out ${qc_out_dir}/${bfile_prefix}_chr1-22_mafgte${maf_threshold}
-plink --bfile ${qc_out_dir}/${bfile_prefix}_chr1-22 --exclude ${qc_out_dir}/${bfile_prefix}_chr1-22_mafgte${maf_threshold}.bim --keep-allele-order --make-bed --out ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold}
 
 # Exclude high LD regions
 plink --bfile ${qc_out_dir}/${bfile_prefix}_chr1-22_mafgte${maf_threshold} --exclude ${COMPLEX_REGIONS_FILE} --range --keep-allele-order --make-bed --out ${qc_out_dir}/${bfile_prefix}_chr1-22_mafgte${maf_threshold}_nocr
@@ -116,14 +115,6 @@ plink --bfile ${qc_out_dir}/${bfile_prefix}_chr1-22_mafgte${maf_threshold}_nocr 
 
 echo "Step 3: Plotting heterozygosity (MAF >= ${maf_threshold})..."
 Rscript ${PLOTTING_LIBS_DIR}/plot_het_2.R ${qc_out_dir}/${bfile_prefix}_chr1-22_mafgte${maf_threshold}_nocr_ldpruned mafgte${maf_threshold} $analysis_name $report_plot_dir
-
-# Same for MAF < threshold
-plink --bfile ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold} --exclude ${COMPLEX_REGIONS_FILE} --range --keep-allele-order --make-bed --out ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold}_nocr
-plink --bfile ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold}_nocr --indep-pairwise ${LD_WINDOW} ${LD_STEP} ${LD_R2} --out ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold}_nocr_pruning
-plink --bfile ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold}_nocr --extract ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold}_nocr_pruning.prune.in --het --out ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold}_nocr_ldpruned
-
-echo "Step 3: Plotting heterozygosity (MAF < ${maf_threshold})..."
-Rscript ${PLOTTING_LIBS_DIR}/plot_het_2.R ${qc_out_dir}/${bfile_prefix}_chr1-22_mafless${maf_threshold}_nocr_ldpruned mafless${maf_threshold} $analysis_name $report_plot_dir
 
 # Create LD Pruned File
 LD_PRUNED_FILE="${qc_out_dir}/${bfile_prefix}_chr1-22_mafgte${maf_threshold}_nocr_ldpruned"

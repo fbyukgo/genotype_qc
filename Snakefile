@@ -141,26 +141,21 @@ rule ld_pruning_and_het:
         # 1. Extract Autosomes
         plink --bfile {params.base_prefix} --autosome --keep-allele-order --make-bed --out {params.out_prefix}_chr1-22
         
-        # 2. Split by MAF (High vs Low)
+        # 2. Filter for Common Variants Only (MAF >= Threshold)
+        # Previously we split High vs Low here. Now we just keep High (Common).
         plink --bfile {params.out_prefix}_chr1-22 --maf {params.maf} --keep-allele-order --make-bed --out {params.out_prefix}_highMAF
-        plink --bfile {params.out_prefix}_chr1-22 --exclude {params.out_prefix}_highMAF.bim --keep-allele-order --make-bed --out {params.out_prefix}_lowMAF
         
-        # 3. Prune and Het (High MAF)
+        # 3. Prune and Het (Common Variants)
         plink --bfile {params.out_prefix}_highMAF --exclude {params.complex} --range --keep-allele-order --make-bed --out {params.out_prefix}_highMAF_nocr
         plink --bfile {params.out_prefix}_highMAF_nocr --indep-pairwise {params.ld_win} {params.ld_step} {params.ld_r2} --out {params.out_prefix}_highMAF_pruning
         plink --bfile {params.out_prefix}_highMAF_nocr --extract {params.out_prefix}_highMAF_pruning.prune.in --het --out {params.out_prefix}_highMAF_het
         
-        # 4. Prune and Het (Low MAF)
-        plink --bfile {params.out_prefix}_lowMAF --exclude {params.complex} --range --keep-allele-order --make-bed --out {params.out_prefix}_lowMAF_nocr
-        plink --bfile {params.out_prefix}_lowMAF_nocr --indep-pairwise {params.ld_win} {params.ld_step} {params.ld_r2} --out {params.out_prefix}_lowMAF_pruning
-        plink --bfile {params.out_prefix}_lowMAF_nocr --extract {params.out_prefix}_lowMAF_pruning.prune.in --het --out {params.out_prefix}_lowMAF_het
-        
-        # 5. Create the final LD pruned file for next steps (using High MAF set)
+        # 4. Create the final LD pruned file (for downstream steps)
+        # This file is used by 'check_relatedness' and 'ancestry_mds'
         plink --bfile {params.out_prefix}_highMAF_nocr --extract {params.out_prefix}_highMAF_pruning.prune.in --keep-allele-order --make-bed --out {config[out_dir]}/{BASE_NAME}_ldpruned
 
-        # 6. Plotting
+        # 5. Plotting (Only Common Variants)
         Rscript {config[plot_script_dir]}/plot_het_2.R {params.out_prefix}_highMAF_het mafgte{params.maf} {PREFIX} {config[plot_dir]}
-        Rscript {config[plot_script_dir]}/plot_het_2.R {params.out_prefix}_lowMAF_het mafless{params.maf} {PREFIX} {config[plot_dir]}
         
         touch {output.plot_flag}
         """
